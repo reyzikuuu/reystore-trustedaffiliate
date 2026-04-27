@@ -82,11 +82,11 @@ import products from '../data/products.json';
   </section>
 
   <!-- ========== GRID PRODUK ========== -->
-  <section id="produk" class="py-16 md:py-24">
+  <section id="produk" class="py-10 md:py-24">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <div class="text-center">
-        <span class="badge mb-4">
-          <svg class="h-4 w-4 animate-pulse" viewBox="0 0 24 24" fill="none">
+        <span class="badge mb-3 sm:mb-4">
+          <svg class="h-3.5 w-3.5 sm:h-4 sm:w-4 animate-pulse" viewBox="0 0 24 24" fill="none">
             <path d="M12 23C6.48 23 2 18.52 2 13c0-3.43 1.78-6.44 4.46-8.17.38-.25.88.05.83.5-.24 2.07.52 4.27 2.37 5.93a.25.25 0 0 0 .42-.18c.08-1.94.56-4.15 2.02-6.08 1.38-1.82 3.42-3.2 6.18-3.97.43-.12.82.31.67.73C17.86 5.3 18.29 8.3 19.4 10.5c.67 1.32 1.1 2.8 1.1 4.37 0 4.49-3.59 8.13-8.5 8.13Z" fill="url(#fire-grad)"/>
             <path d="M14.5 23c-2.49 0-4.5-2.01-4.5-4.5 0-1.57.67-2.98 1.73-3.97.2-.19.53-.04.52.23-.05 1.43.62 2.76 1.85 3.44a.25.25 0 0 0 .37-.22c.02-.74.26-1.5.73-2.16.5-.7 1.23-1.18 1.91-1.46.24-.1.49.13.42.38-.15.55-.08 1.14.2 1.66.38.7.63 1.5.63 2.35 0 2.27-1.65 4.25-3.86 4.25Z" fill="url(#fire-inner)"/>
             <defs>
@@ -102,26 +102,26 @@ import products from '../data/products.json';
           </svg>
           Pilihan Terbaik
         </span>
-        <h2 class="section-heading">Produk Pilihan</h2>
-        <p class="section-subheading mx-auto max-w-xl">Produk populer dengan diskon terbaik, dikurasi khusus untuk Anda.</p>
+        <h2 class="section-heading text-xl md:text-3xl">Produk Pilihan</h2>
+        <p class="section-subheading mx-auto max-w-xl text-sm md:text-lg">Produk populer dengan diskon terbaik, dikurasi khusus untuk Anda.</p>
       </div>
 
-      <div class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:gap-6">
+      <div class="mt-6 sm:mt-12 grid grid-cols-2 gap-2.5 sm:gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:gap-6">
         {products.map((product) => (
           <article class="card flex flex-col">
             <a href={`/produk/${product.slug}`} class="block relative">
-              <img src={product.image} alt={product.name} loading="lazy" class="aspect-square w-full object-cover rounded-t-xl" />
+              <img src={product.image} alt={product.name} loading="lazy" class="aspect-[4/5] sm:aspect-square w-full object-cover rounded-t-xl" />
               {product.discount && (
-                <span class="badge-discount absolute left-2 top-2">-{product.discount}</span>
+                <span class="badge-discount absolute left-1.5 top-1.5 sm:left-2 sm:top-2 text-[10px] sm:text-xs">-{product.discount}</span>
               )}
             </a>
-            <div class="p-3 sm:p-4 flex flex-col flex-1">
-              <a href={`/produk/${product.slug}`} class="block mb-2.5">
-                <h3 class="line-clamp-2 text-sm font-medium text-gray-800 hover:text-shopee-primary transition-colors">{product.name}</h3>
+            <div class="p-2 sm:p-4 flex flex-col flex-1">
+              <a href={`/produk/${product.slug}`} class="block mb-1.5 sm:mb-2.5">
+                <h3 class="line-clamp-2 text-[11px] sm:text-sm font-medium leading-snug text-gray-800 hover:text-shopee-primary transition-colors">{product.name}</h3>
               </a>
 
               {product.pros && product.pros.length > 0 && (
-                <ul class="mb-3 space-y-1.5">
+                <ul class="mb-1.5 sm:mb-3 space-y-0.5 sm:space-y-1.5 hidden sm:block">
                   {product.pros.slice(0, 2).map((pro: string) => (
                     <li class="flex items-start gap-1.5 text-xs text-gray-500">
                       <svg class="h-3.5 w-3.5 text-green-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
@@ -135,17 +135,17 @@ import products from '../data/products.json';
 
               <div class="mt-auto flex flex-col pt-1 border-t border-gray-50">
                 {product.original_price && (
-                  <div class="flex items-center gap-1.5 mb-0.5">
-                    <span class="text-xs font-medium text-gray-400 line-through decoration-gray-400/70">{product.original_price}</span>
+                  <div class="flex items-center gap-1 sm:gap-1.5 mb-0.5">
+                    <span class="text-[10px] sm:text-xs font-medium text-gray-400 line-through decoration-gray-400/70">{product.original_price}</span>
                     {product.discount && (
-                      <span class="text-[10px] font-bold text-shopee-primary bg-shopee-primary/10 px-1 py-0.5 rounded-sm">-{product.discount}</span>
+                      <span class="text-[9px] sm:text-[10px] font-bold text-shopee-primary bg-shopee-primary/10 px-1 py-0.5 rounded-sm">-{product.discount}</span>
                     )}
                   </div>
                 )}
-                <span class="text-base sm:text-lg font-bold text-shopee-primary leading-none">{product.price}</span>
+                <span class="text-sm sm:text-lg font-bold text-shopee-primary leading-none">{product.price}</span>
               </div>
 
-              <a href={product.shopee} target="_blank" rel="noopener noreferrer nofollow" onclick="if(typeof fbq !== 'undefined') fbq('track', 'Lead');" class="btn-primary mt-3 block w-full py-2.5 text-xs text-center font-semibold rounded-lg">
+              <a href={product.shopee} target="_blank" rel="noopener noreferrer nofollow" onclick="if(typeof fbq !== 'undefined') fbq('track', 'Lead');" class="btn-primary mt-2 sm:mt-3 block w-full py-1.5 sm:py-2.5 text-[10px] sm:text-xs text-center font-semibold rounded-lg">
                 {product.cta_text || "Lihat di Shopee"}
               </a>
             </div>
