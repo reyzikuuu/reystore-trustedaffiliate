@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply text-gray-700;
+  }
+
+  /* Better focus styles */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-shopee-primary;
+  }
+
+  /* Selection color */
+  ::selection {
+    @apply bg-shopee-primary/10 text-shopee-dark;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-shopee-primary px-6 py-3 text-center text-sm font-semibold text-white shadow-md transition-all duration-300 ease-out hover:bg-shopee-dark hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-shopee-primary/40 focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-6 py-3 text-center text-sm font-semibold text-gray-700 shadow-sm transition-all duration-300 ease-out hover:border-shopee-primary/30 hover:text-shopee-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-shopee-primary/40 focus:ring-offset-2;
+  }
+
+  .card {
+    @apply overflow-hidden rounded-2xl border border-gray-100/80 bg-white shadow-card transition-all duration-300 ease-out hover:shadow-card-hover hover:-translate-y-1;
+  }
+
+  .section-heading {
+    @apply text-2xl font-bold tracking-tight text-gray-900 md:text-3xl;
+  }
+
+  .section-subheading {
+    @apply mt-3 text-base text-gray-500 md:text-lg;
+  }
+
+  /* Badge / Tag */
+  .badge {
+    @apply inline-flex items-center rounded-full bg-shopee-accent px-2.5 py-0.5 text-xs font-medium text-shopee-primary;
+  }
+
+  .badge-discount {
+    @apply inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-xs font-bold text-red-500;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

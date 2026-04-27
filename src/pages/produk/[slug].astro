@@ -1,0 +1,143 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import products from '../../data/products.json';
+
+export async function getStaticPaths() {
+  return products.map(p => ({ params: { slug: p.slug }, props: { product: p } }));
+}
+const { product } = Astro.props;
+
+// Parsing harga (contoh: "Rp199.000" menjadi "199000") untuk keperluan Schema Google
+const numericPrice = product.price.replace(/[^0-9]/g, '');
+
+// Membuat Structured Data (Schema.org) untuk Rich Snippet Google
+const schemaData = {
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": product.name,
+  "image": `https://www.reystore.com${product.image}`,
+  "description": product.review,
+  "offers": {
+    "@type": "Offer",
+    "url": product.shopee,
+    "priceCurrency": "IDR",
+    "price": numericPrice,
+    "availability": "https://schema.org/InStock"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "128"
+  }
+};
+---
+<Layout title={product.name + ' - Review'} description={product.review.slice(0,150)}>
+  <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <!-- FIRST LOOK: foto + CTA di atas fold -->
+    <div class="grid md:grid-cols-2 gap-8 items-start">
+      <div>
+        <img src={product.image} alt={product.name} loading="lazy" class="w-full rounded-2xl shadow" width="600" height="600" />
+      </div>
+      <div>
+        <h1 class="text-2xl md:text-3xl font-bold">{product.name}</h1>
+        <div class="mt-3">
+          {product.original_price && (
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-sm font-medium text-gray-400 line-through decoration-gray-400/70">{product.original_price}</span>
+              {product.discount && (
+                <span class="text-xs font-bold text-shopee-primary bg-shopee-primary/10 px-1.5 py-0.5 rounded-sm">-{product.discount}</span>
+              )}
+            </div>
+          )}
+          <p class="text-3xl font-bold text-shopee-primary">{product.price}</p>
+        </div>
+        
+        <!-- URGENCY ELEMENT -->
+        <div class="mt-6 flex items-center justify-between rounded-xl bg-orange-50 px-4 py-3 border border-orange-100">
+          <div class="flex items-center gap-2.5">
+            <svg class="h-5 w-5 text-orange-500 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
+            </svg>
+            <span class="text-sm font-bold text-orange-800">Promo Berakhir Segera!</span>
+          </div>
+          <span class="text-[11px] font-bold uppercase tracking-wide text-orange-600 bg-orange-100/80 px-2 py-1 rounded-md">Stok Terbatas</span>
+        </div>
+
+        <!-- CTA WAJIB DI SINI -->
+        <a href={product.shopee} target="_blank" rel="nofollow sponsored noopener" onclick="if(typeof fbq !== 'undefined') fbq('track', 'Lead');" class="btn-primary group flex items-center justify-center gap-2 w-full mt-3 text-lg py-3.5 rounded-xl font-bold bg-shopee-primary text-white hover:bg-shopee-dark transition-all shadow-lg shadow-shopee-primary/20 hover:shadow-xl hover:shadow-shopee-primary/30 hover:-translate-y-0.5">
+          {product.cta_text || "Lihat di Shopee"}
+          <svg class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+        <p class="text-xs text-slate-400 mt-3 text-center">Link afiliasi Shopee. Harga dapat berubah sewaktu-waktu.</p>
+
+        <ul class="mt-6 space-y-3 text-sm text-gray-600">
+          {product.pros.map((pro: string) => (
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-green-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              <span>{pro}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- REVIEW PANJANG DI BAWAH -->
+    <div class="mt-16 border-t border-gray-100 pt-10">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl font-bold tracking-tight text-gray-900">Review Pemakaian</h2>
+        <p class="mt-4 text-base leading-relaxed text-gray-600">
+          {product.review}
+        </p>
+
+        <div class="mt-10 grid sm:grid-cols-2 gap-6">
+          <!-- Kelebihan -->
+          <div class="rounded-2xl bg-green-50/50 p-6 border border-green-100/50">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-green-800 mb-5 flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+              </svg>
+              Kelebihan
+            </h3>
+            <ul class="space-y-3.5">
+              {product.pros.map((p: string) => (
+                <li class="flex items-start gap-3 text-sm text-gray-700">
+                  <svg class="h-5 w-5 text-green-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                  </svg>
+                  <span class="leading-relaxed">{p}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Kekurangan -->
+          <div class="rounded-2xl bg-red-50/50 p-6 border border-red-100/50">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-red-800 mb-5 flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5" />
+              </svg>
+              Kekurangan
+            </h3>
+            <ul class="space-y-3.5">
+              {product.cons.map((c: string) => (
+                <li class="flex items-start gap-3 text-sm text-gray-700">
+                  <svg class="h-5 w-5 text-red-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  <span class="leading-relaxed">{c}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

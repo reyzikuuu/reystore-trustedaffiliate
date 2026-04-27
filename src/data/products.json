@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Headset Gaming Wireless Anti Delay",
+    "slug": "headset-gaming-wireless",
+    "image": "/images/hero-shopping.webp",
+    "price": "Rp199.000",
+    "original_price": "Rp299.000",
+    "discount": "33%",
+    "shopee": "https://shopee.co.id/",
+    "cta_text": "Lihat di Shopee",
+    "review": "Headset ini sangat nyaman dipakai berlama-lama dan baterainya sangat awet. Sangat cocok untuk main game FPS karena tidak ada delay suara.",
+    "pros": [
+      "Low latency (anti delay)",
+      "Baterai tahan 24 jam",
+      "Busa telinga sangat empuk"
+    ],
+    "cons": [
+      "Ukuran sedikit bulky",
+      "Hanya tersedia warna hitam"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Speaker Bluetooth Portable Super Bass",
+    "slug": "speaker-bluetooth-portable",
+    "image": "/images/hero-shopping.webp",
+    "price": "Rp99.000",
+    "original_price": "Rp150.000",
+    "discount": "34%",
+    "shopee": "https://shopee.co.id/",
+    "cta_text": "Lihat di Shopee",
+    "review": "Suara bass-nya sangat nendang walaupun ukuran speakernya kecil. Tahan cipratan air sehingga cocok dibawa ke pantai atau area outdoor.",
+    "pros": [
+      "Bass sangat kuat",
+      "Tahan air (IPX4)",
+      "Desain ringkas dan ringan"
+    ],
+    "cons": [
+      "Lama pengisian daya 3 jam",
+      "Tanpa port aux 3.5mm"
+    ]
+  }
+]

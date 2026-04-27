@@ -1,0 +1,18 @@
+// Contoh struktur data produk affiliate Shopee.
+// Salin format ini ke products.json saat menambahkan produk.
+//
+// [
+//   {
+//     "id": 1,
+//     "nama": "Nama Produk",
+//     "slug": "nama-produk",
+//     "harga_asli": 150000,
+//     "harga_diskon": 99000,
+//     "diskon_persen": 34,
+//     "gambar": "/images/produk-1.webp",
+//     "link_afiliasi": "https://shope.ee/xxxxx",
+//     "kategori": "Elektronik",
+//     "rating": 4.8,
+//     "terjual": "1rb+"
+//   }
+// ]
