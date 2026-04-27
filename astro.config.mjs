@@ -3,8 +3,9 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://reyzikuuu.github.io',
-  base: '/reystore-trustedaffiliate',
+  // Ganti dengan custom domain nanti saat production (contoh: 'https://www.reystore.com')
+  site: 'https://reystore-trustedaffiliate.pages.dev',
+  base: '/',
   output: 'static',
   integrations: [
     tailwind({

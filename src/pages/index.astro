@@ -38,7 +38,7 @@ import products from '../data/products.json';
             </svg>
             Lihat Produk
           </a>
-          <a href="/reystore-trustedaffiliate/disclosure" class="btn-secondary">
+          <a href="/disclosure" class="btn-secondary">
             Tentang Kami
           </a>
         </div>
@@ -70,7 +70,7 @@ import products from '../data/products.json';
       <div class="hidden md:flex justify-end">
         <div class="relative animate-fade-in">
           <img
-            src="/reystore-trustedaffiliate/images/hero-shopping.webp"
+            src="/images/hero-shopping.webp"
             alt="Berbagai produk belanja online keluar dari kotak - elektronik, fashion, dan lainnya"
             loading="eager"
             class="w-full max-w-lg lg:max-w-xl xl:max-w-2xl translate-x-8 lg:translate-x-12 -translate-y-4"
@@ -109,14 +109,14 @@ import products from '../data/products.json';
       <div class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:gap-6">
         {products.map((product) => (
           <article class="card flex flex-col">
-            <a href={`/reystore-trustedaffiliate/produk/${product.slug}`} class="block relative">
+            <a href={`/produk/${product.slug}`} class="block relative">
               <img src={product.image} alt={product.name} loading="lazy" class="aspect-square w-full object-cover rounded-t-xl" />
               {product.discount && (
                 <span class="badge-discount absolute left-2 top-2">-{product.discount}</span>
               )}
             </a>
             <div class="p-3 sm:p-4 flex flex-col flex-1">
-              <a href={`/reystore-trustedaffiliate/produk/${product.slug}`} class="block mb-2.5">
+              <a href={`/produk/${product.slug}`} class="block mb-2.5">
                 <h3 class="line-clamp-2 text-sm font-medium text-gray-800 hover:text-shopee-primary transition-colors">{product.name}</h3>
               </a>
 
