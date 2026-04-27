@@ -3,7 +3,8 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://www.reystore.com',
+  site: 'https://reyzikuuu.github.io',
+  base: '/reystore-trustedaffiliate',
   output: 'static',
   integrations: [
     tailwind({
