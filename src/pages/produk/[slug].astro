@@ -10,6 +10,9 @@ const { product } = Astro.props;
 // Parsing harga (contoh: "Rp199.000" menjadi "199000") untuk keperluan Schema Google
 const numericPrice = product.price.replace(/[^0-9]/g, '');
 
+// Array of images: gunakan product.images jika ada, jika tidak fallback ke product.image
+const productImages = product.images && product.images.length > 0 ? product.images : [product.image];
+
 // Membuat Structured Data (Schema.org) untuk Rich Snippet Google
 const schemaData = {
   "@context": "https://schema.org/",
@@ -37,8 +40,65 @@ const schemaData = {
   <div class="max-w-5xl mx-auto px-4 py-5 sm:py-8">
     <!-- FIRST LOOK: foto + CTA di atas fold -->
     <div class="grid md:grid-cols-2 gap-4 sm:gap-8 items-start">
-      <div>
-        <img src={product.image} alt={product.name} loading="lazy" class="w-[65%] sm:w-full mx-auto rounded-xl sm:rounded-2xl shadow aspect-[4/5] sm:aspect-auto object-cover" width="600" height="600" />
+      <div class="relative group w-[65%] sm:w-full mx-auto">
+        <!-- Image Slider Container -->
+        <div id="image-slider" class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth rounded-xl sm:rounded-2xl shadow aspect-[4/5] sm:aspect-auto sm:aspect-[4/5] md:aspect-square hide-scrollbar">
+          {productImages.map((img: string, idx: number) => (
+            <div class="flex-none w-full snap-center relative h-full">
+              <img src={img} alt={`${product.name} - Gambar ${idx + 1}`} loading={idx === 0 ? "eager" : "lazy"} class="w-full h-full object-cover" width="600" height="600" />
+            </div>
+          ))}
+        </div>
+
+        <!-- Slider Controls (hanya tampil jika gambar > 1) -->
+        {productImages.length > 1 && (
+          <>
+            <!-- Navigation Arrows (Desktop) -->
+            <button onclick="document.getElementById('image-slider').scrollBy({left: -document.getElementById('image-slider').offsetWidth, behavior: 'smooth'})" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-1.5 sm:p-2 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100 disabled:opacity-30 z-10 hidden sm:flex items-center justify-center">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <button onclick="document.getElementById('image-slider').scrollBy({left: document.getElementById('image-slider').offsetWidth, behavior: 'smooth'})" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-1.5 sm:p-2 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100 disabled:opacity-30 z-10 hidden sm:flex items-center justify-center">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+            
+            <!-- Indicator Dots -->
+            <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10 pointer-events-none">
+              {productImages.map((_, idx) => (
+                <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white shadow-sm slider-dot opacity-50" id={`dot-${idx}`}></div>
+              ))}
+            </div>
+            
+            <!-- Simple script to handle active dot indicator based on scroll -->
+            <script is:inline>
+              document.addEventListener('DOMContentLoaded', () => {
+                const slider = document.getElementById('image-slider');
+                if(!slider) return;
+                const dots = document.querySelectorAll('.slider-dot');
+                if(dots.length === 0) return;
+                
+                // Set initial active dot
+                dots[0].classList.remove('opacity-50');
+                dots[0].classList.add('opacity-100');
+                
+                slider.addEventListener('scroll', () => {
+                  const scrollLeft = slider.scrollLeft;
+                  const width = slider.offsetWidth;
+                  const activeIndex = Math.round(scrollLeft / width);
+                  
+                  dots.forEach((dot, idx) => {
+                    if(idx === activeIndex) {
+                      dot.classList.remove('opacity-50');
+                      dot.classList.add('opacity-100');
+                    } else {
+                      dot.classList.remove('opacity-100');
+                      dot.classList.add('opacity-50');
+                    }
+                  });
+                });
+              });
+            </script>
+          </>
+        )}
       </div>
       <div>
         <h1 class="text-lg sm:text-2xl md:text-3xl font-bold leading-snug">{product.name}</h1>
