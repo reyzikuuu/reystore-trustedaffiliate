@@ -68,7 +68,7 @@ const schemaData = {
               ))}
             </div>
             
-            <!-- Simple script to handle active dot indicator based on scroll -->
+            <!-- Simple script to handle active dot indicator based on scroll and auto-slide -->
             <script is:inline>
               document.addEventListener('DOMContentLoaded', () => {
                 const slider = document.getElementById('image-slider');
@@ -95,6 +95,43 @@ const schemaData = {
                     }
                   });
                 });
+
+                // Auto slide feature (1.5 detik)
+                let autoSlideInterval;
+                const startAutoSlide = () => {
+                  // Hapus interval lama jika ada untuk mencegah double interval
+                  if (autoSlideInterval) clearInterval(autoSlideInterval);
+                  
+                  autoSlideInterval = setInterval(() => {
+                    const width = slider.offsetWidth;
+                    const maxScrollLeft = slider.scrollWidth - width;
+                    // Tambahkan margin kecil untuk toleransi angka floating point
+                    let nextScrollLeft = slider.scrollLeft + width;
+                    
+                    // Kembali ke gambar pertama jika sudah mencapai gambar terakhir
+                    if (nextScrollLeft > maxScrollLeft + 5) {
+                      nextScrollLeft = 0;
+                    }
+                    
+                    slider.scrollTo({
+                      left: nextScrollLeft,
+                      behavior: 'smooth'
+                    });
+                  }, 1500); // 1500 ms = 1.5 detik
+                };
+
+                const stopAutoSlide = () => {
+                  clearInterval(autoSlideInterval);
+                };
+
+                // Jalankan auto slide
+                startAutoSlide();
+
+                // Hentikan sementara saat user berinteraksi (hover atau sentuh)
+                slider.addEventListener('mouseenter', stopAutoSlide);
+                slider.addEventListener('mouseleave', startAutoSlide);
+                slider.addEventListener('touchstart', stopAutoSlide, { passive: true });
+                slider.addEventListener('touchend', startAutoSlide);
               });
             </script>
           </>
