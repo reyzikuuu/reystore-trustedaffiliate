@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://reystore-trustedaffiliate.pages.dev/sitemap-index.xml
+Sitemap: https://reystoreofficial.my.id/sitemap-index.xml
