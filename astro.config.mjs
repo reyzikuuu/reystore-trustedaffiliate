@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   // Ganti dengan custom domain nanti saat production (contoh: 'https://www.reystore.com')
-  site: 'https://reystore-trustedaffiliate.pages.dev',
+  site: 'https://reystoreofficial.my.id',
   base: '/',
   output: 'static',
   integrations: [
