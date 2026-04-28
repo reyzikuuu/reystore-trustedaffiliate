@@ -42,7 +42,7 @@ const schemaData = {
     <div class="grid md:grid-cols-2 gap-4 sm:gap-8 items-start">
       <div class="relative group w-[65%] sm:w-full mx-auto">
         <!-- Image Slider Container -->
-        <div id="image-slider" class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth rounded-xl sm:rounded-2xl shadow aspect-[4/5] sm:aspect-auto sm:aspect-[4/5] md:aspect-square hide-scrollbar">
+        <div id="image-slider" class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth rounded-xl sm:rounded-2xl shadow aspect-[4/5] sm:aspect-auto md:aspect-square hide-scrollbar">
           {productImages.map((img: string, idx: number) => (
             <div class="flex-none w-full snap-center relative h-full">
               <img src={img} alt={`${product.name} - Gambar ${idx + 1}`} loading={idx === 0 ? "eager" : "lazy"} class="w-full h-full object-cover" width="600" height="600" />
