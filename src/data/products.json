@@ -29,30 +29,5 @@
     "cons": [
       "hanya tersedia 4 pilihan warna"
     ]
-  },
-  {
-    "id": 2,
-    "name": "Speaker Bluetooth Portable Super Bass",
-    "slug": "speaker-bluetooth-portable",
-    "image": "/images/hero-shopping.webp",
-    "images": [
-      "/images/hero-shopping.webp",
-      "/images/og-image.jpg"
-    ],
-    "price": "Rp99.000",
-    "original_price": "Rp150.000",
-    "discount": "34%",
-    "shopee": "https://shopee.co.id/",
-    "cta_text": "Lihat di Shopee",
-    "review": "Suara bass-nya sangat nendang walaupun ukuran speakernya kecil. Tahan cipratan air sehingga cocok dibawa ke pantai atau area outdoor.",
-    "pros": [
-      "Bass sangat kuat",
-      "Tahan air (IPX4)",
-      "Desain ringkas dan ringan"
-    ],
-    "cons": [
-      "Lama pengisian daya 3 jam",
-      "Tanpa port aux 3.5mm"
-    ]
   }
 ]
