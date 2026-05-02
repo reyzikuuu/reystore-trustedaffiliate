@@ -237,4 +237,19 @@ const schemaData = {
       </div>
     </div>
   </div>
+
+  <!-- Meta Pixel: Melacak event ViewContent saat Detail Produk dimuat -->
+  <!-- Menggunakan define:vars agar variabel dari server (Astro) dapat diakses di client script -->
+  <script define:vars={{ productName: product.name, productPrice: numericPrice, productId: product.slug }}>
+    // Memastikan fbq sudah ter-load sebelum mengirim event ViewContent
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'ViewContent', {
+        content_name: productName,
+        content_ids: [productId],
+        content_type: 'product',
+        value: Number(productPrice),
+        currency: 'IDR'
+      });
+    }
+  </script>
 </Layout>

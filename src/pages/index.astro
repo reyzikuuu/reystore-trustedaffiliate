@@ -155,4 +155,14 @@ import products from '../data/products.json';
     </div>
   </section>
 
+  <!-- Meta Pixel: Melacak event ViewContent saat Homepage dimuat -->
+  <script is:inline>
+    // Memastikan fbq sudah ter-load sebelum mengirim event ViewContent
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'ViewContent', {
+        content_name: 'Homepage - Rey Store',
+        content_category: 'Homepage'
+      });
+    }
+  </script>
 </Layout>
