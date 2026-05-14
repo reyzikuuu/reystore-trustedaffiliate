@@ -1,4 +1,6 @@
 ---
+import MetaPixel from '../components/MetaPixel.astro';
+
 const {
   title = "Rey Store — Rekomendasi Produk Terbaik Shopee",
   description = "Rey Store membantu Anda menemukan produk terbaik dengan harga spesial dari Shopee Indonesia.",
@@ -77,42 +79,8 @@ const {
       gtag("config", "G-XXXXXXXXXX");
     </script>
 
-    <!-- Meta Pixel - Ganti 123456789012345 dengan ID Pixel Anda -->
-    <script is:inline>
-      !(function (f, b, e, v, n, t, s) {
-        if (f.fbq) return;
-        n = f.fbq = function () {
-          n.callMethod
-            ? n.callMethod.apply(n, arguments)
-            : n.queue.push(arguments);
-        };
-        if (!f._fbq) f._fbq = n;
-        n.push = n;
-        n.loaded = !0;
-        n.version = "2.0";
-        n.queue = [];
-        t = b.createElement(e);
-        t.async = !0;
-        t.src = v;
-        s = b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t, s);
-      })(
-        window,
-        document,
-        "script",
-        "https://connect.facebook.net/en_US/fbevents.js",
-      );
-      fbq("init", "1992327198020900");
-      fbq("track", "PageView");
-    </script>
-    <noscript
-      ><img
-        height="1"
-        width="1"
-        style="display:none"
-        src="https://www.facebook.com/tr?id=1992327198020900&ev=PageView&noscript=1"
-      /></noscript
-    >
+    <!-- Meta Pixel (CAPI Support) -->
+    <MetaPixel eventName="PageView" />
     <!-- ========================================== -->
   </head>
   <body class="min-h-screen flex flex-col bg-surface-50 font-sans antialiased">
